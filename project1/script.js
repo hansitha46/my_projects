@@ -1,9 +1,9 @@
-// Selecting necessary elements
+
 const taskInput = document.getElementById("taskInput");
 const addTaskBtn = document.getElementById("addTaskBtn");
 const todoList = document.getElementById("todoList");
 
-// Add Task Button Click Event
+
 addTaskBtn.addEventListener("click", () => {
   const taskText = taskInput.value.trim();
 
@@ -43,8 +43,7 @@ function addTask(taskText) {
   deleteBtn.addEventListener("click", () => {
     todoList.removeChild(listItem);
   });
-
-  // Append all elements to list item
+  
   listItem.appendChild(checkbox);
   listItem.appendChild(taskSpan);
   listItem.appendChild(deleteBtn);
