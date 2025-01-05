@@ -76,10 +76,11 @@ body {
     color: #3ea556;
   }
   
-  /* Checkbox Styling */
+  
   .checkbox {
     margin-right: 10px;
-    transform: scale(1.2); /* Makes checkboxes slightly larger */
+    transform: scale(1.2); 
+      
   }
   
   .delete-btn {
