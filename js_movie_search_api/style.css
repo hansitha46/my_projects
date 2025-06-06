@@ -1,0 +1,43 @@
+.container{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 209, 233);
+    min-height: 100%;
+}
+button{
+    border:none;
+    border-radius: 3px;
+}
+#movie-name{
+    border: none;
+    border-radius: 3px;
+}
+ul{
+    list-style-type: none;
+}
+
+.movie-card{
+    display: flex;
+    background-color: beige;
+    margin: 20px auto;
+    border-radius: 12px;
+    padding: 15px ;
+    width: 90%;
+    max-width: 800px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+
+
+
+}
+img{
+    width: 150px;
+    border-radius: 8px;
+}
+.main-details{
+    display:flex;
+    flex-direction: column;
+    margin-left: 20px;
+    justify-content: center;
+}
