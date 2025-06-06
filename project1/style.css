@@ -71,16 +71,14 @@ body {
   }
   
   .todo-item.completed {
-    text-decoration: line-through;
     background-color: #d4edda;
     color: #3ea556;
   }
   
-  
+  /* Checkbox Styling */
   .checkbox {
     margin-right: 10px;
     transform: scale(1.2); 
-      
   }
   
   .delete-btn {
