@@ -1,9 +1,12 @@
-
+// Selecting necessary elements
 const taskInput = document.getElementById("taskInput");
 const addTaskBtn = document.getElementById("addTaskBtn");
 const todoList = document.getElementById("todoList");
 
+// Add Task Button Click Event
 
+let tasks = [];
+loadTasks();
 addTaskBtn.addEventListener("click", () => {
   const taskText = taskInput.value.trim();
 
@@ -15,37 +18,64 @@ addTaskBtn.addEventListener("click", () => {
   }
 });
 
-// Function to Add Task
-function addTask(taskText) {
-  const listItem = document.createElement("li");
-  listItem.className = "todo-item";
 
-  // Create Checkbox
-  const checkbox = document.createElement("input");
-  checkbox.type = "checkbox";
-  checkbox.className = "checkbox";
 
-  // Create Task Span
-  const taskSpan = document.createElement("span");
-  taskSpan.textContent = taskText;
+function addTask(task){
+  let taskItem ={
+    text: task,
+    completed : false,
+  };
+  tasks.push(taskItem);
+  saveTasks();
+  renderList();
 
-  // Mark as Completed when Checkbox is Checked
-  checkbox.addEventListener("change", () => {
-    listItem.classList.toggle("completed");
-  });
-
-  // Create Delete Button
-  const deleteBtn = document.createElement("button");
-  deleteBtn.textContent = "Delete";
-  deleteBtn.className = "delete-btn";
-
-  // Delete Task
-  deleteBtn.addEventListener("click", () => {
-    todoList.removeChild(listItem);
-  });
-  
-  listItem.appendChild(checkbox);
-  listItem.appendChild(taskSpan);
-  listItem.appendChild(deleteBtn);
-  todoList.appendChild(listItem);
 }
+
+function renderList(){
+  let taskItemsList = tasks.map((task,index)=>
+  {
+    return `<li class="todo-item">
+        <input type="checkbox" ${task.completed ? 'checked':''}>
+        <span>${task.text}</span>
+        <button class="delete-btn">Delete</button>
+
+    </li>`
+  }).join("");
+  todoList.innerHTML = taskItemsList;
+
+}
+
+todoList.addEventListener('click',(event)=>{
+  if(event.target.tagName === 'INPUT'){
+    const taskIndex = tasks.findIndex((task)=> task.text ===event.target.parentNode.querySelector('span').innerText);
+    if(taskIndex !== -1){
+        tasks[taskIndex].completed = event.target.checked;
+        event.target.parentNode.classList.toggle("completed");
+        renderList();
+    }
+  }
+   else if(event.target.tagName === 'BUTTON'){
+    const taskIndex = tasks.findIndex((task)=> task.text ===event.target.parentNode.querySelector('span').innerText);
+    if(taskIndex !== -1){
+        tasks.splice(taskIndex,1);
+        renderList();
+    }
+  }
+  saveTasks();
+})
+
+
+function saveTasks(){
+  localStorage.setItem('tasks',JSON.stringify(tasks));
+}
+
+function loadTasks(){
+  const tasksLoaded = localStorage.getItem('tasks');
+  if(tasksLoaded){
+  tasks = JSON.parse(tasksLoaded);
+  renderList();
+  }
+}
+
+
+
